@@ -13,6 +13,7 @@ import menuConfigs from '../../configs/menu.configs';
 import { themeModes } from '../../configs/theme.configs';
 import { setThemeMode } from '../../redux/features/themeModeSlice';
 import { setAuthModalOpen } from '../../redux/features/authModalSlice';
+import Sidebar from '../common/Sidebar';
 
 const ScrollAppBar = ({ children, window }) => {
     const { themeMode } = useSelector((state) => state.themeMode);
@@ -44,17 +45,20 @@ const Header = () => {
 
     const dispatch = useDispatch();
 
-    const onSwithTheme = () => {
+    const onSwitchTheme = () => {
         const theme = themeMode === themeModes.dark ? themeModes.light : themeModes.dark;
         dispatch(setThemeMode(theme));
     };
+
+    const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
     return (
         <>
+            <Sidebar open={sidebarOpen} toggleSidebar={toggleSidebar} />
             <ScrollAppBar>
                 <AppBar elevation={0} sx={{ zIndex: 9999 }}>
                     <Toolbar sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
                         <Stack direction="row" spacing={1} alignItems="center">
-                            <IconButton color="inherit" sx={{ mr: 2, display: { md: 'none' } }}>
+                            <IconButton color="inherit" sx={{ mr: 2, display: { md: 'none' } }} onClick={toggleSidebar}>
                                 <MenuIcon />
                             </IconButton>
                             <Box sx={{ display: { xs: 'inline-block', md: 'none' } }}>
@@ -80,7 +84,7 @@ const Header = () => {
                                     {item.display}
                                 </Button>
                             ))}
-                            <IconButton sx={{ color: 'inherit' }} onClick={onSwithTheme}>
+                            <IconButton sx={{ color: 'inherit' }} onClick={onSwitchTheme}>
                                 {themeMode === themeModes.dark && <DarkModeOutlinedIcon />}
                                 {themeMode === themeModes.light && <WbSunnyOutlinedIcon />}
                             </IconButton>
