@@ -1,12 +1,9 @@
 import React from 'react';
 
-import Container from '../common/Container';
 import Logo from '../common/Logo';
-import menuConfigs from '../../configs/menu.configs';
+import Container from '../common/Container';
 
-import { Paper, Stack, Button, Box } from '@mui/material';
-
-import { Link } from 'react-router-dom';
+import { Paper, Stack, Box } from '@mui/material';
 
 const Footer = () => {
     return (
@@ -20,18 +17,7 @@ const Footer = () => {
                 >
                     <Logo />
                     <Box>
-                        {menuConfigs.main.map((item, index) => (
-                            <Button
-                                key={index}
-                                sx={{
-                                    color: 'inherit',
-                                }}
-                                component={Link}
-                                to={item.path}
-                            >
-                                {item.display}
-                            </Button>
-                        ))}
+                        <span>© 2023 Copyright: Nguyễn Đức Toàn </span>
                     </Box>
                 </Stack>
             </Paper>
