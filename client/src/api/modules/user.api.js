@@ -1,5 +1,5 @@
-import publicClient from '../client/public.client';
 import privateClient from '../client/private.client';
+import publicClient from '../client/public.client';
 
 const userEndpoints = {
     signin: 'user/signin',
@@ -11,10 +11,12 @@ const userEndpoints = {
 const userApi = {
     signin: async ({ username, password }) => {
         try {
+            console.log('send request');
             const response = await publicClient.post(userEndpoints.signin, { username, password });
 
-            return response;
+            return { response };
         } catch (err) {
+            console.log('err');
             return { err };
         }
     },
@@ -27,16 +29,16 @@ const userApi = {
                 displayName,
             });
 
-            return response;
+            return { response };
         } catch (err) {
             return { err };
         }
     },
-    getInfo: async ({}) => {
+    getInfo: async () => {
         try {
             const response = await privateClient.get(userEndpoints.getInfo);
 
-            return response;
+            return { response };
         } catch (err) {
             return { err };
         }
@@ -49,7 +51,7 @@ const userApi = {
                 confirmNewPassword,
             });
 
-            return response;
+            return { response };
         } catch (err) {
             return { err };
         }

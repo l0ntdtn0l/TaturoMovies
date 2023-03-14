@@ -1,16 +1,16 @@
 import axios from 'axios';
 import queryString from 'query-string';
 
-const baseUrl = 'http://192.168.31.229:5000/api/v1/';
+const baseURL = 'http://192.168.31.229:5000/api/v1/';
 
 const publicClient = axios.create({
-    baseUrl,
+    baseURL,
     paramsSerializer: {
         encode: (params) => queryString.stringify(params),
     },
 });
 
-publicClient.interceptors.request(async (config) => {
+publicClient.interceptors.request.use(async (config) => {
     return {
         ...config,
         headers: {
